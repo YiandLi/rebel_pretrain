@@ -1,0 +1,33 @@
+model_name: t5-small
+share_emb: True
+agg_method: 4_d  # { 2_d, 4_d, CLN
+ent_prompt: "[agg_ent_vector]"  # [agg_ent_vector] The type of the entity [ {ent} ] is :
+rel_prompt: "[agg_rel_vector]"  # [agg_rel_vector] The type of the relation between the two spans [ {sub} ] and [ {obj} ] is:
+none_label_prompt: ""  # 会自动在后面拼接一个 <eos> ； "corresponds to no relation type"
+none_ent_prompt: ""
+train_span_iden: True
+trian_ent: True
+train_rel: True
+complete_eval_begin_epoch: 0
+complete_train_begin_epoch: 0
+span_loss_ratio: 0.05
+span_logistic_threshold: 0
+ent_negative_sample: bernoulli  # 'No' for not negative_sample , bernoulli, all, no
+rel_negative_sample: all  #  bernoulli
+rel_neg_sample_num: 3
+max_seq_len: 128
+dataset_path: date/rebel_star  # ../t5_SchemeFreeRE/data/scierc_star
+bad_case_output_path: eval_bad_cases.txt
+batch_size: 2
+epochs: 10
+lr: 1e-5
+
+
+expname: pre-train-rebel
+
+hydra:
+  run:
+    dir: outputs/${expname}-${now:%Y-%m-%d-%H-%M-%S}
+
+
+
